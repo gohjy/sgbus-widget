@@ -57,15 +57,15 @@ Throw the following into your HTML:
 </sgbus-widget>
 ```
 
+The custom element will automatically refresh the data every 30 seconds.
+
 > [!NOTE]
 > 
 > If you do **not** include the `<template>` and `<script type="application/json">`, 
 > SGBusWidget will just display a generic "SGBusWidget" screen
 > (see the [demo page](./demo.html) for an idea of how this works).
 
-...
-
-That's it.
+## Feedback
 
 Questions can go on [GitHub Issues](https://github.com/gohjy/sgbus-widget/issues). 
 The source code is available in the [GitHub repo](https://github.com/gohjy/sgbus-widget) as well.
