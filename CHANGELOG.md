@@ -1,5 +1,10 @@
 # SGBusWidget Changelog
 
+## v0.1.3
+- Fixed an issue with the script causing the custom element not to update every 30 seconds as expected.
+- Updated several links around the repo to the new links (forgot to do previously).
+- Add 30 sec reload documentation to docs.
+
 ## v0.1.2
 Fixed an issue with the script causing the styling not to work. 
 Add some proper credits in the README.
