@@ -1,7 +1,7 @@
 # SGBusWidget
 Custom element to include bus arrival data for Singapore's public buses on your site. Powered by arrivelah - https://github.com/cheeaun/arrivelah
 
-**Docs: [https://gohjy.github.io/sgbus-widget/docs](https://gohjy.github.io/sgbus-widget/docs)
+**Docs: [https://gohjy.github.io/sgbus-widget/docs](https://gohjy.github.io/sgbus-widget/docs)**
 
 With thanks to:
 - [zero-md-docs] for the (extremely easy-to-use) docs template
