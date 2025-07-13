@@ -179,7 +179,7 @@ class SGBusWidget extends HTMLElement {
             return;
         }
 
-        this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.1/style.min.css" rel="stylesheet">`;
+        this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.3/style.min.css" rel="stylesheet">`;
 
         let styleHTML = "";
         
