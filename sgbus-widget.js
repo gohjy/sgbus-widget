@@ -76,7 +76,7 @@ const initPage = (mainContainer, stops) => {
     const lastUpdateHolder = document.createElement("div");
     lastUpdateHolder.id = "last-update";
     lastUpdateHolder.textContent = "Loading data..."
-    mainContainer.append(lastUpdateHolder);
+    mainContainer.after(lastUpdateHolder);
 }
 
 const loadData = async (mainContainer, stops) => {
@@ -136,11 +136,12 @@ const loadData = async (mainContainer, stops) => {
         })();
     }
 
-    mainContainer.querySelector("#last-update").textContent = "Last updated " + dateToTime(new Date()) + " SGT";
+    mainContainer.parentNode.querySelector("#last-update").textContent = "Last updated " + dateToTime(new Date()) + " SGT";
 }
 
 class SGBusWidget extends HTMLElement {
     #shadow;
+    #svcHolder;
     #template;
     #config;
     #observer;
@@ -162,7 +163,13 @@ class SGBusWidget extends HTMLElement {
         this.#config = this.#template?.content?.querySelector(`script[type="application/json"]`)?.textContent?.trim();
         console.log(this.#config);
 
-        if (!this.#config) {
+        try {
+            this.#config = JSON.parse(this.#config);
+        } catch {
+            this.#config = null;
+        }
+
+        if (!this.#config || !this.#template || !this.#template.content) {
             this.#shadow.innerHTML = `
             <div style="padding-top:2em;padding-bottom:2em;text-align:center;">
             <h2 style="font-size:1.5em;margin-top:0;">SGBusWidget</h2>
@@ -172,16 +179,22 @@ class SGBusWidget extends HTMLElement {
             return;
         }
 
-        try {
-            this.#config = JSON.parse(this.#config);
-        } catch {
-            this.#config = JSON.parse(defaultConfig);
+        this.#shadow.innerHTML = `<link hrefr="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.1/style.min.css" href="../style.css" rel="stylesheet">`;
+
+        let styleHTML = "";
+        
+        for (let styleElem of this.#template.content.querySelectorAll(":is(style, link[href][rel=\"stylesheet\"])")) {
+            console.log(this.#shadow.append)
+            styleHTML += styleElem.outerHTML;
         }
+        this.#shadow.innerHTML += styleHTML;
 
-        this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1/style.min.css" rel="stylesheet">`;
+        this.#svcHolder = document.createElement("div");
+        this.#svcHolder.classList.add("svc-all-holder")
+        this.#shadow.append(this.#svcHolder);
 
-        initPage(this.#shadow, this.#config.stops);
-        loadData(this.#shadow, this.#config.stops);
+        initPage(this.#svcHolder, this.#config.stops);
+        loadData(this.#svcHolder, this.#config.stops);
         setInterval(() => loadData(this.#shadow, this.#config.stops), 30000);
     }
 }

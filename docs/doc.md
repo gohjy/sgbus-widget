@@ -5,18 +5,27 @@ See the [demo page](./demo.html) for an idea of the final display.
 
 > [!NOTE]
 > 
-> SGBusWidget is **not stable**! It is in **initial development** (v0.1.0), and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.1 or @0.1.0), and please use the element with caution.
+> SGBusWidget is **not stable**! It is in **initial development** (v0.1.1), and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.1.1), and please use the element with caution.
 
 ## Installation
 Throw the following into your HTML:
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1/sgbus-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.1/sgbus-widget.min.js"></script>
 ```
 
 ## Usage
 ```html
 <sgbus-widget>
     <template>
+        <!-- You can include custom styling, which will be applied after the defaults -->
+        <style>
+            .svc-all-holder {
+                /* Make the display single-column */
+                /* See demo page for effect */
+                display: inline-block;
+            }
+        </style>
+
         <!-- Your configuration goes in the script tag below -->
         <script type="application/json">
             // If you don't know your stop/service details, check out busrouter.sg

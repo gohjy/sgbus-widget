@@ -16,7 +16,8 @@
     width: 100%;
     max-width: 100%;
 }
-:where(:host) {
+
+.svc-all-holder {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
 }

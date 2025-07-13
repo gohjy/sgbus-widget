@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1/sgbus-widget.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.1/sgbus-widget.min.js" type="module"></script>
     <style>
         :root {
             color-scheme: dark;
@@ -65,8 +65,13 @@
         </template>
     </sgbus-widget>
     <h2>Custom <code>display: inline-block</code></h2>
-    <sgbus-widget style="display: inline-block;">
+    <sgbus-widget>
         <template>
+            <style>
+                .svc-all-holder {
+                    display: inline-block;
+                }
+            </style>
             <script type="application/json">
                 {
                     "stops": [

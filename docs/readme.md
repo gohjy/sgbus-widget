@@ -1,2 +1,3 @@
 - [SGBusWidget](./doc.md)
+- [Demo](./demo.html)
 - [Visit GitHub Repo](https://github.com/gohjy/sgbus-widget)
