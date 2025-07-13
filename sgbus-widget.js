@@ -195,7 +195,7 @@ class SGBusWidget extends HTMLElement {
 
         initPage(this.#svcHolder, this.#config.stops);
         loadData(this.#svcHolder, this.#config.stops);
-        setInterval(() => loadData(this.#shadow, this.#config.stops), 30000);
+        setInterval(() => loadData(this.#svcHolder, this.#config.stops), 30000);
     }
 }
 
