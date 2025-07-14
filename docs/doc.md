@@ -5,12 +5,12 @@ See the [demo page](./demo.html) for an idea of the final display.
 
 > [!NOTE]
 > 
-> SGBusWidget is **not stable**! It is in **initial development** (v0.1.3), and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.1.3), and please use the element with caution.
+> SGBusWidget is **not stable**! It is in **initial development** (v0.1.4), and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.1.4), and please use the element with caution.
 
 ## Installation
 Throw the following into your HTML:
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.3/sgbus-widget.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.4/sgbus-widget.min.js"></script>
 ```
 
 ## Usage
