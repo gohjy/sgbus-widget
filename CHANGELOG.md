@@ -1,5 +1,8 @@
 # SGBusWidget Changelog
 
+## v0.1.4
+- Fixed an issue where the font size of the stop name headers would temporarily appear bigger before the stylesheet loaded.
+
 ## v0.1.3
 - Fixed an issue with the script causing the custom element not to update every 30 seconds as expected.
 - Updated several links around the repo to the new links (forgot to do previously).
