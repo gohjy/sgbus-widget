@@ -39,7 +39,7 @@ const initPage = (mainContainer, stops) => {
         stopDiv.dataset.stopId = stop.code;
         stopDiv.classList.add("stop-container");
 
-        const stopHeader = document.createElement("h2");
+        const stopHeader = document.createElement("div");
 
         stopHeader.textContent = stop.name;
 

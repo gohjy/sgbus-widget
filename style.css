@@ -86,6 +86,8 @@ h2 {
 
 .stop-container > :first-child {
     margin-bottom: .5em;
+    margin-top: .8em;
+    font-weight: bold;
 }
 
 @media (prefers-color-scheme: light) {
