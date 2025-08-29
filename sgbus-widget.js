@@ -1,22 +1,3 @@
-/* 
-const defaultConfig = `
-{
-    "stops": [
-        {
-            "code": 16991,
-            "name": "Front Gate",
-            "svcs": ["189"]
-        },
-        {
-            "code": 17191,
-            "name": "Back Gate",
-            "svcs": ["196"]
-        }
-    ]
-}`
-*/
-const defaultConfig = `{"stops":[{"code":16991,"name":"Front Gate","svcs":["189"]},{"code":17191,"name":"Back Gate","svcs":["196"]}]}`;
-
 const dateToTime = (dateObj) => {
     const p = x=> x.toString().padStart(2, "0");
     return `${p((dateObj.getUTCHours()+8)%24)}:${p(dateObj.getMinutes())}:${p(dateObj.getSeconds())}`;
@@ -179,7 +160,7 @@ class SGBusWidget extends HTMLElement {
             return;
         }
 
-        this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.5/style.min.css" rel="stylesheet">`;
+        this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.6/style.min.css" rel="stylesheet">`;
 
         let styleHTML = "";
         

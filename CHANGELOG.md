@@ -1,5 +1,8 @@
 # SGBusWidget Changelog
 
+## v0.1.6
+- Clean up code (no changes to functionality or usage)
+
 ## v0.1.5
 - Use `console.debug` instead of `console.log` and add clear indication that the console message is from SGBusWidget
 
