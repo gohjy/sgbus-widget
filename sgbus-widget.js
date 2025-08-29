@@ -94,7 +94,7 @@ const loadData = async (mainContainer, stops) => {
             const svcHolder = stopBox.querySelector(":scope .service-holder");
 
             const data = await getArrData(stop.code);
-            console.log(data);
+            console.debug(`[SGBusWidget] Stop arrival data for stop ${stop.code}:`, data);
 
             if (!data) {
                 const p = document.createElement("p");
@@ -107,7 +107,7 @@ const loadData = async (mainContainer, stops) => {
             
 
             for (let svc of dataSource) {
-                console.log(svc);
+                console.debug("[SGBusWidget] Processing service:", svc);
 
                 const svcCont = svcHolder.querySelector(`:scope [data-service="${svc}"]`);
 
@@ -153,7 +153,7 @@ class SGBusWidget extends HTMLElement {
     connectedCallback() {
         if (!this.#shadow) this.#shadow = this.attachShadow({mode: "open"});
         this.#template = this.querySelector("template");
-        console.log(this.#template)
+        console.debug("[SGBusWidget] <template>:", this.#template);
 
         if (this.#template) {
             this.#observer = new MutationObserver(() => this.connectedCallback());
@@ -161,7 +161,7 @@ class SGBusWidget extends HTMLElement {
         }  
 
         this.#config = this.#template?.content?.querySelector(`script[type="application/json"]`)?.textContent?.trim();
-        console.log(this.#config);
+        console.debug("[SGBusWidget] Config:", this.#config);
 
         try {
             this.#config = JSON.parse(this.#config);
@@ -184,7 +184,6 @@ class SGBusWidget extends HTMLElement {
         let styleHTML = "";
         
         for (let styleElem of this.#template.content.querySelectorAll(":is(style, link[href][rel=\"stylesheet\"])")) {
-            console.log(this.#shadow.append)
             styleHTML += styleElem.outerHTML;
         }
         this.#shadow.innerHTML += styleHTML;

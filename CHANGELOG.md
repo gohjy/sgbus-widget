@@ -1,5 +1,8 @@
 # SGBusWidget Changelog
 
+## v0.1.5
+- Use `console.debug` instead of `console.log` and add clear indication that the console message is from SGBusWidget
+
 ## v0.1.4
 - Fixed an issue where the font size of the stop name headers would temporarily appear bigger before the stylesheet loaded.
 
