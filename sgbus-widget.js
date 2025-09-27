@@ -190,9 +190,16 @@ class SGBusWidget extends HTMLElement {
 
     if (!this.#config || !this.#template || !this.#template.content) {
       this.#shadow.innerHTML = `
-      <div style="padding-top:2em;padding-bottom:2em;text-align:center;">
-      <h2 style="font-size:1.5em;margin-top:0;">SGBusWidget</h2>
-      <a style="color:#888888;" target="_blank" href="https://github.com/gohjy/sgbus-widget">View on GitHub</a>
+      <div style="
+        padding-top: 2em; 
+        padding-bottom: 2em;
+        text-align: center;
+        ">
+      <h2 style="
+        font-size: 1.5em;
+        margin-block-start: 0;
+        ">SGBusWidget</h2>
+      <a style="color: #888888;" target="_blank" href="https://github.com/gohjy/sgbus-widget">View on GitHub</a>
       </div>
       `;
       return;
