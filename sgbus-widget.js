@@ -9,10 +9,13 @@ const dateToTime = (dateObj) => {
     }`;
 }
 
-const getArrData = async (stopCode) => {
+const getArrData = async (stopCode, arrivelahInstance) => {
     if (typeof stopCode !== "number") return false;
 
-    return await (fetch(`https://arrivelah2.busrouter.sg/?id=${stopCode}`, {"cache": "reload"})
+    let urlObj = new URL(arrivelahInstance);
+    urlObj.searchParams.set("id", stopCode);
+
+    return await (fetch(urlObj.href, {"cache": "reload"})
     .then(x => x.json())
     .catch(() => false));
 }
@@ -77,7 +80,7 @@ const initPage = (mainContainer, stops) => {
     mainContainer.after(lastUpdateHolder);
 }
 
-const loadData = async (mainContainer, stops) => {
+const loadData = async (mainContainer, stops, options) => {
     if (
         !mainContainer.querySelector(".stop-container") 
         && hasSvcs(stops)
@@ -99,7 +102,7 @@ const loadData = async (mainContainer, stops) => {
             const stopBox = mainContainer.querySelector(`[data-stop-id="${stop.code}"]`);
             const svcHolder = stopBox.querySelector(":scope .service-holder");
 
-            const data = await getArrData(stop.code);
+            const data = await getArrData(stop.code, options.arrivelahInstance);
             console.debug(`[SGBusWidget] Stop arrival data for stop ${stop.code}:`, data);
 
             if (!data) {
@@ -164,6 +167,8 @@ class SGBusWidget extends HTMLElement {
         super();
     }
 
+    static observedAttributes = ["arrivelah-instance", "request-interval"];
+
     connectedCallback() {
         if (!this.#shadow) this.#shadow = this.attachShadow({mode: "open"});
         this.#template = this.querySelector("template");
@@ -206,9 +211,25 @@ class SGBusWidget extends HTMLElement {
         this.#svcHolder.classList.add("svc-all-holder")
         this.#shadow.append(this.#svcHolder);
 
+        const options = {};
+        try {
+            options.arrivelahInstance = new URL(this.getAttribute("arrivelah-instance"));
+        } catch {
+            // if attr isn't set, URL() will throw
+            options.arrivelahInstance = "https://arrivelah2.busrouter.sg/";
+        }
+        options.requestTimeout = Number.parseFloat(this.getAttribute("request-timeout"));
+        if (
+            Number.isNaN(options.requestTimeout)
+            || (options.requestTimeout < 0)
+        ) {
+            options.requestTimeout = 30;
+        }
+        
+
         initPage(this.#svcHolder, this.#config.stops);
-        loadData(this.#svcHolder, this.#config.stops);
-        setInterval(() => loadData(this.#svcHolder, this.#config.stops), 30000);
+        loadData(this.#svcHolder, this.#config.stops, options);
+        setInterval(() => loadData(this.#svcHolder, this.#config.stops, options), options.requestTimeout * 1000);
     }
 }
 
