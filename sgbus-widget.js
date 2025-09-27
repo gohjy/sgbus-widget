@@ -56,11 +56,17 @@ const initPage = (mainContainer, stops) => {
 
         svcCont.append(svcId);
 
-        for (let i=1; i<=3; i++) {
+        for (let i=0; i<3; i++) {
           const timeBox = document.createElement("span");
           timeBox.classList.add("time-indicator");
           timeBox.textContent = "";
-          timeBox.dataset.busCount = ["next", "next2", "next3"][i - 1];
+          timeBox.dataset.busCount = ["next", "next2", "next3"][i];
+
+          if (i === 0) {
+            timeBox.textContent = "Loading...";
+            timeBox.classList.add("no-data", "grey"); // show dotted underline
+          }
+
           svcCont.append(timeBox);
         }
 
@@ -122,6 +128,8 @@ const loadData = async (mainContainer, stops, options) => {
 
         for (let key of ["next", "next2", "next3"]) {
           const indicator = svcCont.querySelector(`:scope [data-bus-count=${key}]`);
+          indicator.classList.remove("grey");
+          
           const svcArrData = data.services.find(x => x.no === svc);
           if (!svcArrData?.[key]?.time) {
             setClass(indicator, "");
