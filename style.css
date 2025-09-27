@@ -61,7 +61,7 @@ h2 {
 
 .seat { border-color: #00ff00; }
 .stand { border-color: #ffff00; }
-.no { border-color: #ff0000; }
+.crowd { border-color: #ff0000; }
 
 .service-holder {
   display: flex;
@@ -83,7 +83,7 @@ h2 {
 @media (prefers-color-scheme: light) {
   .seat { border-color: #008800; }
   .stand { border-color: #ffbf00; }
-  .no { border-color: #ff0000; }
+  .crowd { border-color: #ff0000; }
 }
 
 section > :first-child {
