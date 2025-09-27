@@ -11,11 +11,19 @@ const getArrData = async (stopCode) => {
     .catch(() => false));
 }
 
+const hasSvcs = (stops) => {
+    if (stops.length === 0) return false;
+    if ([...stops].map(x => x.svcs).flat().length === 0) return false;
+    return true;
+};
+
 const newElem = x => document.createElement(x);
 
 const initPage = (mainContainer, stops) => {
     for (let stop of stops) {
         if (mainContainer.querySelector(`[data-stop-id="${stop.code}"]`)) continue;
+        if (stop.svcs.length === 0) continue;
+
         const stopDiv = document.createElement("div");
         stopDiv.dataset.stopId = stop.code;
         stopDiv.classList.add("stop-container");
@@ -61,7 +69,10 @@ const initPage = (mainContainer, stops) => {
 }
 
 const loadData = async (mainContainer, stops) => {
-    if (!mainContainer.querySelector(".stop-container")) initPage();
+    if (
+        !mainContainer.querySelector(".stop-container") 
+        && hasSvcs(stops)
+    ) initPage(mainContainer, stops);
 
     const setClass = (elem, cls) => {
         for (let clsName of ["seat", "stand", "no"]) elem.classList.toggle(clsName, clsName === cls);
@@ -70,6 +81,11 @@ const loadData = async (mainContainer, stops) => {
     const milToMins = (mils) => Math.floor(mils / 1000 / 60);
 
     for (let stop of stops) {
+        if (stop.svcs.length === 0) {
+            console.debug(`[SGBusWidget] Skipping processing stop ${stop.code} as no services are included`);
+            continue;
+        }
+
         (async function() {
             const stopBox = mainContainer.querySelector(`[data-stop-id="${stop.code}"]`);
             const svcHolder = stopBox.querySelector(":scope .service-holder");
@@ -84,10 +100,7 @@ const loadData = async (mainContainer, stops) => {
                 return;
             }
 
-            const dataSource = stop.svcs;
-            
-
-            for (let svc of dataSource) {
+            for (let svc of stop.svcs) {
                 console.debug("[SGBusWidget] Processing service:", svc);
 
                 const svcCont = svcHolder.querySelector(`:scope [data-service="${svc}"]`);
@@ -117,7 +130,15 @@ const loadData = async (mainContainer, stops) => {
         })();
     }
 
-    mainContainer.parentNode.querySelector("#last-update").textContent = "Last updated " + dateToTime(new Date()) + " SGT";
+    const lastUpdateHolder = mainContainer.parentNode.querySelector("#last-update");
+
+    if (hasSvcs(stops)) {
+        lastUpdateHolder.textContent = "Last updated " + dateToTime(new Date()) + " SGT";
+    } else {
+        lastUpdateHolder.textContent = "No stop data to display.";
+        mainContainer.classList.add("no-stops");
+    }
+    
 }
 
 class SGBusWidget extends HTMLElement {

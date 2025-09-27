@@ -94,8 +94,11 @@ section > :first-child {
     color: #888888;
 }
 
-#last-update {
+.svc-all-holder ~ #last-update {
     font-size: .9em;
     font-style: italic;
+}
+
+.svc-all-holder:not(.no-stops) ~ #last-update {
     margin-top: .8em;
 }
