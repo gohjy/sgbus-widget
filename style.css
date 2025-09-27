@@ -102,3 +102,11 @@ section > :first-child {
 .svc-all-holder:not(.no-stops) ~ #last-update {
     margin-top: .8em;
 }
+
+.stop-container:not(.has-error) > .error-holder {
+    display: none;
+}
+
+.stop-container.has-error > .service-holder {
+    display: none;
+}

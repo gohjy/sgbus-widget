@@ -65,7 +65,10 @@ const initPage = (mainContainer, stops) => {
             }
         }
 
-        stopDiv.append(stopHeader, svcHolder);
+        const errorHolder = newElem("p");
+        errorHolder.classList.add("error-holder");
+
+        stopDiv.append(stopHeader, svcHolder, errorHolder);
         mainContainer.append(stopDiv);
     }
     const lastUpdateHolder = document.createElement("div");
@@ -100,11 +103,14 @@ const loadData = async (mainContainer, stops) => {
             console.debug(`[SGBusWidget] Stop arrival data for stop ${stop.code}:`, data);
 
             if (!data) {
-                const p = document.createElement("p");
-                p.textContent = "Stop data could not be loaded";
-                svcHolder.before(p)
+                const errorArea = stopBox.querySelector(":scope > .error-holder");
+                errorArea.textContent = "Stop data could not be loaded";
+                stopBox.classList.add("has-error");
+
                 return;
             }
+
+            stopBox.classList.remove("has-error");
 
             for (let svc of stop.svcs) {
                 console.debug("[SGBusWidget] Processing service:", svc);
