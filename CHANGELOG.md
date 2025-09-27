@@ -1,5 +1,8 @@
 # SGBusWidget Changelog
 
+## v0.1.8
+- Fixed an issue where if fetching data failed, the text "Stop data could not be found" would be prepended to the stop container every time the data failed. If this happened enough times, there would be a chain of such messages that would not be cleared, even if the fetch subsequently succeeded.
+
 ## v0.1.7
 - Fixed an issue where when no stops were included in config, or when no stops with non-empty `svcs` arrays were included, SGBusWidget would throw an error and leave a "Loading data" message onscreen.
 - Fixed an issue where if the user's device time zone had minute or second offsets from UTC, the SGT time would also (wrongly) include those offsets.
