@@ -1,6 +1,12 @@
 const dateToTime = (dateObj) => {
     const p = x=> x.toString().padStart(2, "0");
-    return `${p((dateObj.getUTCHours()+8)%24)}:${p(dateObj.getMinutes())}:${p(dateObj.getSeconds())}`;
+    return `${
+        p((dateObj.getUTCHours() + 8) % 24)
+    }:${
+        p(dateObj.getUTCMinutes())
+    }:${
+        p(dateObj.getUTCSeconds())
+    }`;
 }
 
 const getArrData = async (stopCode) => {
