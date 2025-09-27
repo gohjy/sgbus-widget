@@ -15,7 +15,15 @@ Throw the following into your HTML:
 
 ## Usage
 ```html
-<sgbus-widget>
+<!-- 
+Attributes:
+arrivelah-instance defines the instance of the arrivelah proxy that will be used to fetch data.
+request-timeout is the time in seconds to wait before updating with new data.
+Below, they are set to their defaults.
+-->
+<sgbus-widget
+  arrivelah-instance="https://arrivelah2.busrouter.sg/"
+  request-timeout="30">
   <template>
     <!-- You can include custom styling, which will be applied after the defaults -->
     <style>
@@ -58,7 +66,7 @@ Throw the following into your HTML:
 </sgbus-widget>
 ```
 
-The custom element will automatically refresh the data every 30 seconds.
+The custom element will automatically refresh the data every 30 seconds. Change the `request-timeout` attribute of `<sgbus-widget>` to change this.
 
 > [!NOTE]
 > 
