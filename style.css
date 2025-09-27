@@ -1,62 +1,62 @@
 * {
-    font-family: inherit;
+  font-family: inherit;
 }
 
 :host {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .svc-all-holder {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
 }
 
 h2 {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .nobold { font-weight: normal; }
 
 #bus-timings {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .stop-container {
-    width: 20em;
-    max-width: 100%;
+  width: 20em;
+  max-width: 100%;
 }
 
 .service-id {
-    display: inline-block;
-    padding: 5px;
-    background-color: #03C04A88;
-    border-color: #03C04AAA;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 5px;
+  display: inline-block;
+  padding: 5px;
+  background-color: #03C04A88;
+  border-color: #03C04AAA;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
 }
 
 .time-indicator {
-    display: inline-block;
-    border-bottom: 2px solid;
-    border-color: #888888;
+  display: inline-block;
+  border-bottom: 2px solid;
+  border-color: #888888;
 
-    line-height: initial;
+  line-height: initial;
 }
 
 .time-indicator {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .unmonitored-schedule {
-    border-bottom-style: dashed;
+  border-bottom-style: dashed;
 }
 
 .no-data {
-    border-bottom-style: dotted;
+  border-bottom-style: dotted;
 }
 
 .seat { border-color: #00ff00; }
@@ -64,49 +64,49 @@ h2 {
 .no { border-color: #ff0000; }
 
 .service-holder {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 .service-container {
-    margin-bottom: .5em;
+  margin-bottom: .5em;
 }
 
 .stop-container > :first-child {
-    margin-bottom: .5em;
-    margin-top: .8em;
-    font-weight: bold;
+  margin-bottom: .5em;
+  margin-top: .8em;
+  font-weight: bold;
 }
 
 @media (prefers-color-scheme: light) {
-    .seat { border-color: #008800; }
-    .stand { border-color: #ffbf00; }
-    .no { border-color: #ff0000; }
+  .seat { border-color: #008800; }
+  .stand { border-color: #ffbf00; }
+  .no { border-color: #ff0000; }
 }
 
 section > :first-child {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .grey {
-    color: #888888;
+  color: #888888;
 }
 
 .svc-all-holder ~ #last-update {
-    font-size: .9em;
-    font-style: italic;
+  font-size: .9em;
+  font-style: italic;
 }
 
 .svc-all-holder:not(.no-stops) ~ #last-update {
-    margin-top: .8em;
+  margin-top: .8em;
 }
 
 .stop-container:not(.has-error) > .error-holder {
-    display: none;
+  display: none;
 }
 
 .stop-container.has-error > .service-holder {
-    display: none;
+  display: none;
 }
