@@ -9,7 +9,8 @@
 
 .svc-all-holder {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(20em, 100%), 1fr));
+  max-width: 100%;
 }
 
 h2 {
