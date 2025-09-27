@@ -1,5 +1,9 @@
 # SGBusWidget Changelog
 
+## v0.1.7
+- Fixed an issue where when no stops were included in config, or when no stops with non-empty `svcs` arrays were included, SGBusWidget would throw an error and leave a "Loading data" message onscreen.
+- Fixed an issue where if the user's device time zone had minute or second offsets from UTC, the SGT time would also (wrongly) include those offsets.
+
 ## v0.1.6
 - Clean up code (no changes to functionality or usage)
 
