@@ -213,7 +213,7 @@ class SGBusWidget extends HTMLElement {
       return;
     }
 
-    this.#shadow.innerHTML = `<link href="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.8/style.min.css" rel="stylesheet">`;
+    this.#shadow.innerHTML = `<link href="${new URL("style.min.css", import.meta.url)}" rel="stylesheet">`;
 
     let styleHTML = "";
     
