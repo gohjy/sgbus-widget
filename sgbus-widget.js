@@ -276,7 +276,8 @@ class SGBusWidget extends HTMLElement {
     };
 
     const defaults = {
-      arrivelahInstance: "https://arrivelah2.busrouter.sg"
+      arrivelahInstance: "https://arrivelah2.busrouter.sg",
+      requestTimeout: 30
     };
 
     try {
@@ -294,7 +295,7 @@ class SGBusWidget extends HTMLElement {
     options.requestTimeout = Number.parseFloat(attrs.requestTimeout);
     if (
       Number.isNaN(options.requestTimeout)
-      || (options.requestTimeout < 0)
+      || (options.requestTimeout <= 0)
     ) {
       if (attrs.requestTimeout) {
         // if set but malformed
