@@ -5,12 +5,17 @@ See the [demo page](./demo.html) for an idea of the final display.
 
 > [!NOTE]
 > 
-> SGBusWidget is **not stable** and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.1.8), and please use the element with caution.
+> SGBusWidget is **not stable** and things **may break**! For this reason, you are recommended to load the script via a pinned version (@0.2.0), and please use the element with caution.
 
 ## Installation
 Throw the following into your HTML:
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.1.8/sgbus-widget.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.2.0/sgbus-widget.min.js"></script>
+```
+
+If you'd like to see debug logging (requests, data received, etc) add the `?debug` query parameter, like so:
+```html
+<script type="module" src="https://cdn.jsdelivr.net/gh/gohjy/sgbus-widget@0.2.0/sgbus-widget.min.js?debug"></script>
 ```
 
 ## Usage
