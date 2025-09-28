@@ -292,7 +292,12 @@ class SGBusWidget extends HTMLElement {
     };
 
     try {
-      options.arrivelahInstance = new URL(attrs.arrivelahInstance).href;
+      let urlObj = new URL(attrs.arrivelahInstance);
+      options.arrivelahInstance = urlObj.href;
+
+      if (new URL(defaults.arrivelahInstance).origin !== urlObj.origin) {
+        consoleDebug(`[SGBusWidget] Using custom arrivelah-instance value: ${attrs.arrivelahInstance}`);
+      }
     } catch {
       // if attr isn't set or is malformed, URL() will throw
 
@@ -313,6 +318,10 @@ class SGBusWidget extends HTMLElement {
         console.warn(`[SGBusWidget] request-timeout attribute set to "${attrs.requestTimeout}" (malformed), defaulting to ${defaults.requestTimeout}`);
       }
       options.requestTimeout = defaults.requestTimeout;
+    } else if (options.requestTimeout <= 10) {
+      console.warn(`[SGBusWidget] Using custom request-timeout value ${options.requestTimeout}. This may cause excessive requests to the arrivelah server.`);
+    } else if (options.requestTimeout !== defaults.requestTimeout) {
+      consoleDebug(`[SGBusWidget] Using custom request-timeout value: ${options.requestTimeout}`);
     }
     
 
