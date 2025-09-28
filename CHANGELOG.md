@@ -1,5 +1,13 @@
 # SGBusWidget Changelog
 
+## v0.2.0
+- Improved error handling and error message displaying when arrivelah is down.
+- Added legend for colors and line styles.
+- Added `arrivelah-instance` and `request-timeout` attributes for `<sgbus-widget>` for more customisation.
+- Made debug logging opt-in via loading the `sgbus-widget.js` script with a `?debug` query param.
+- Improved `MutationObserver` handling.
+- Various other small improvements.
+
 ## v0.1.8
 - Fixed an issue where if fetching data failed, the text "Stop data could not be found" would be prepended to the stop container every time the data failed. If this happened enough times, there would be a chain of such messages that would not be cleared, even if the fetch subsequently succeeded.
 
