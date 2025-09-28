@@ -100,14 +100,37 @@ section > :first-child {
   font-style: italic;
 }
 
-.svc-all-holder:not(.no-stops) ~ #last-update {
-  margin-top: .8em;
-}
-
 .stop-container:not(.has-error) > .error-holder {
   display: none;
 }
 
 .stop-container.has-error > .service-holder {
+  display: none;
+}
+
+.legend-details {
+  font-size: .9em;
+}
+
+details > summary:first-of-type {
+  cursor: pointer;
+}
+
+.legend-details, .legend-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: .5em;
+  margin-bottom: .5em;
+}
+
+.legend-content .time-indicator { margin: 0; }
+
+.svc-all-holder:not(.no-stops) ~ .legend-details {
+  margin-top: .8em;
+}
+
+.svc-all-holder.no-stops ~ .legend-details {
   display: none;
 }
