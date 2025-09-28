@@ -1,3 +1,14 @@
+// only log debug messages if loaded with ?debug query param
+const consoleDebug = (() => {
+  if (new URL(import.meta.url).searchParams.has("debug")) {
+    console.debug("[SGBusWidget] Script loaded with ?debug query param, debug logging activated");
+    return console.debug;
+  }
+  else {
+    return () => {};
+  }
+})();
+
 const dateToTime = (dateObj) => {
   const p = x=> x.toString().padStart(2, "0");
   return `${
@@ -135,7 +146,7 @@ const loadData = async (mainContainer, stops, options) => {
 
   for (let stop of stops) {
     if (stop.svcs.length === 0) {
-      console.debug(`[SGBusWidget] Skipping processing stop ${stop.code} as no services are included`);
+      consoleDebug(`[SGBusWidget] Skipping processing stop ${stop.code} as no services are included`);
       continue;
     }
 
@@ -144,7 +155,7 @@ const loadData = async (mainContainer, stops, options) => {
       const svcHolder = stopBox.querySelector(":scope .service-holder");
 
       const data = await getArrData(stop.code, options.arrivelahInstance);
-      console.debug(`[SGBusWidget] Stop arrival data for stop ${stop.code}:`, data);
+      consoleDebug(`[SGBusWidget] Stop arrival data for stop ${stop.code}:`, data);
 
       if (!data) {
         const errorArea = stopBox.querySelector(":scope > .error-holder");
@@ -157,7 +168,7 @@ const loadData = async (mainContainer, stops, options) => {
       stopBox.classList.remove("has-error");
 
       for (let svc of stop.svcs) {
-        console.debug("[SGBusWidget] Processing service:", svc);
+        consoleDebug(`[SGBusWidget] Processing service ${svc} (stop ${stop.code})`);
 
         const svcCont = svcHolder.querySelector(`:scope [data-service="${svc}"]`);
 
@@ -218,10 +229,10 @@ class SGBusWidget extends HTMLElement {
     if (this.#observer) this.#observer.disconnect();
     if (!this.#shadow) this.#shadow = this.attachShadow({mode: "open"});
     this.#template = this.querySelector("template");
-    console.debug("[SGBusWidget] <template>:", this.#template);
+    consoleDebug("[SGBusWidget] <template>:", this.#template);
 
     this.#config = this.#template?.content?.querySelector(`script[type="application/json"]`)?.textContent?.trim();
-    console.debug("[SGBusWidget] Config:", this.#config);
+    consoleDebug("[SGBusWidget] Config:", this.#config);
 
     try {
       this.#config = JSON.parse(this.#config);
