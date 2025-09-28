@@ -80,10 +80,45 @@ const initPage = (mainContainer, stops) => {
     stopDiv.append(stopHeader, svcHolder, errorHolder);
     mainContainer.append(stopDiv);
   }
+
+  const legendDetails = newElem("details");
+  legendDetails.classList.add("legend-details");
+  const legendSummary = newElem("summary");
+  legendSummary.classList.add("legend-title");
+  legendSummary.textContent = "Legend";
+  const legendContent = newElem("div");
+  legendContent.classList.add("legend-content");
+  legendContent.innerHTML = `\
+<div>
+Colors:
+<span class="time-indicator seat"
+>Seating available</span>
+&nbsp;
+<span class="time-indicator stand"
+>Standing available</span>
+&nbsp;
+<span class="time-indicator crowd"
+>Limited standing</span>
+</div>
+
+<div>
+Line style:
+<span class="time-indicator"
+>Real-time data</span>
+&nbsp;
+<span class="time-indicator unmonitored-schedule"
+>Scheduled timing</span>
+&nbsp;
+<span class="time-indicator no-data"
+>No data available</span>
+</div>
+  `;
+  legendDetails.append(legendSummary, legendContent);
+
   const lastUpdateHolder = document.createElement("div");
   lastUpdateHolder.id = "last-update";
   lastUpdateHolder.textContent = "Loading data..."
-  mainContainer.after(lastUpdateHolder);
+  mainContainer.after(legendDetails, lastUpdateHolder);
 }
 
 const loadData = async (mainContainer, stops, options) => {
