@@ -215,14 +215,10 @@ class SGBusWidget extends HTMLElement {
   static observedAttributes = ["arrivelah-instance", "request-interval"];
 
   connectedCallback() {
+    if (this.#observer) this.#observer.disconnect();
     if (!this.#shadow) this.#shadow = this.attachShadow({mode: "open"});
     this.#template = this.querySelector("template");
     console.debug("[SGBusWidget] <template>:", this.#template);
-
-    if (this.#template) {
-      this.#observer = new MutationObserver(() => this.connectedCallback());
-      this.#observer.observe(this.#template.content, {subtree: true, childList: true});
-    }  
 
     this.#config = this.#template?.content?.querySelector(`script[type="application/json"]`)?.textContent?.trim();
     console.debug("[SGBusWidget] Config:", this.#config);
@@ -233,7 +229,16 @@ class SGBusWidget extends HTMLElement {
       this.#config = null;
     }
 
-    if (!this.#config || !this.#template || !this.#template.content) {
+    let isConfigOk = this.#config && this.#template && this.#template.content;
+
+    let mutationObserverTarget = isConfigOk ? this.#template.content : this;
+
+    this.#observer = new MutationObserver(() => this.connectedCallback());
+    this.#observer.observe(mutationObserverTarget, {subtree: true, childList: true});
+
+    if (!isConfigOk) {
+      // MutationObserver does not observe shadow DOM by default
+      // so this will not trigger connectedCallback again
       this.#shadow.innerHTML = `
       <div style="
         padding-top: 2em; 
