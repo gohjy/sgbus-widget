@@ -13,6 +13,10 @@
   max-width: 100%;
 }
 
+.svc-all-holder:not(.no-stops) {
+  margin-bottom: .8em;
+}
+
 h2 {
   font-size: 1em;
 }
@@ -126,10 +130,6 @@ details > summary:first-of-type {
 }
 
 .legend-content .time-indicator { margin: 0; }
-
-.svc-all-holder:not(.no-stops) ~ .legend-details {
-  margin-top: .8em;
-}
 
 .svc-all-holder.no-stops ~ .legend-details {
   display: none;
