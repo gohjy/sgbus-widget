@@ -1,7 +1,6 @@
 # SGBusWidget Changelog
 
 ## v0.2.0
-- Improved error handling and error message displaying when arrivelah is down.
 - Added legend for colors and line styles.
 - Added `arrivelah-instance` and `request-timeout` attributes for `<sgbus-widget>` for more customisation.
 - Made debug logging opt-in via loading the `sgbus-widget.js` script with a `?debug` query param.
