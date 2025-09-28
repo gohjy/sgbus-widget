@@ -269,18 +269,38 @@ class SGBusWidget extends HTMLElement {
     this.#shadow.append(this.#svcHolder);
 
     const options = {};
+
+    let attrs = {
+      arrivelahInstance: this.getAttribute("arrivelah-instance"),
+      requestTimeout: this.getAttribute("request-timeout")
+    };
+
+    const defaults = {
+      arrivelahInstance: "https://arrivelah2.busrouter.sg"
+    };
+
     try {
-      options.arrivelahInstance = new URL(this.getAttribute("arrivelah-instance"));
+      options.arrivelahInstance = new URL(attrs.arrivelahInstance).href;
     } catch {
-      // if attr isn't set, URL() will throw
-      options.arrivelahInstance = "https://arrivelah2.busrouter.sg/";
+      // if attr isn't set or is malformed, URL() will throw
+
+      if (attrs.arrivelahInstance) {
+        // if set but malformed
+        console.warn(`[SGBusWidget] arrivelah-instance attribute set to "${attrs.arrivelahInstance}" (malformed), defaulting to ${defaults.arrivelahInstance}`);
+      }
+      options.arrivelahInstance = defaults.arrivelahInstance;
     }
-    options.requestTimeout = Number.parseFloat(this.getAttribute("request-timeout"));
+    
+    options.requestTimeout = Number.parseFloat(attrs.requestTimeout);
     if (
       Number.isNaN(options.requestTimeout)
       || (options.requestTimeout < 0)
     ) {
-      options.requestTimeout = 30;
+      if (attrs.requestTimeout) {
+        // if set but malformed
+        console.warn(`[SGBusWidget] request-timeout attribute set to "${attrs.requestTimeout}" (malformed), defaulting to ${defaults.requestTimeout}`);
+      }
+      options.requestTimeout = defaults.requestTimeout;
     }
     
 
