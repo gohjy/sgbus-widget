@@ -171,6 +171,8 @@ class SGBusWidget extends HTMLElement {
   #config;
   #observer;
 
+  #intervalId = null;
+
   constructor() {
     super();
   }
@@ -244,7 +246,10 @@ class SGBusWidget extends HTMLElement {
 
     initPage(this.#svcHolder, this.#config.stops);
     loadData(this.#svcHolder, this.#config.stops, options);
-    setInterval(() => loadData(this.#svcHolder, this.#config.stops, options), options.requestTimeout * 1000);
+
+    if (this.#intervalId !== null) clearInterval(this.#intervalId);
+
+    this.#intervalId = setInterval(() => loadData(this.#svcHolder, this.#config.stops, options), options.requestTimeout * 1000);
   }
 }
 
